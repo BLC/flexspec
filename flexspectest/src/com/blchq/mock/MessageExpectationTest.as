@@ -61,6 +61,14 @@ package com.blchq.mock {
 
 					assertFalse(expectation.failedFast);
 				});
+
+				it('should fail when method has been invoked more times than expected', function():void {
+					var expectation:MessageExpectation = new MockNegativeExpectation({}, 'method');
+
+					assertRaise(AssertionFailedError, function():void {
+						expectation.invoke([function():void {}]);
+					})
+				});
 			});
 
 			describe('addReturn', function():void {

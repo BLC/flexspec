@@ -60,7 +60,7 @@ package com.blchq.mock {
 		public function invoke(actualArgs:Array):* {
 			try {
 				_actualCount++;
-				if (_expectedCount != -1 && _expectedCount > _actualCount) {
+				if (_expectedCount != -1 && _actualCount > _expectedCount) {
 					_errorGenerator.raise_expectation_error(_method, _expectedCount, _actualCount, actualArgs);
 				}
 				
