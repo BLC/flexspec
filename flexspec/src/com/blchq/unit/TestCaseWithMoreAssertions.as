@@ -36,13 +36,18 @@ package com.blchq.unit {
 
 		public static function assertCallbackFired(...args):void {
 			var userMessage:String = '';
-			if (args.length == 2) userMessage = args.shift();
+			if (args.length == 2 && args[0] is String) userMessage = args.shift();
 
 			var testCallback:Function = args.shift();
+
+			var expectedArgs:Array = args.slice(0, args.length);
 
 			var callbackFired:Boolean = false;
 			var callbackToBeFired:Function = function(...args):void {
 				callbackFired = true;
+				if (!expectedArgs.length == 0) {
+					assertArrayEquals(expectedArgs, args);
+				}
 			};
 
 			testCallback(callbackToBeFired);

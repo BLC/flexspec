@@ -274,6 +274,12 @@ package com.blchq.unit {
 					});
 				});
 
+				it('should pass when callback called with given args', function():void {
+					TestCaseWithMoreAssertions.assertCallbackFired(function(callback:Function):void {
+						callback('arg1', 2);
+					}, 'arg1', 2);
+				});
+
 				it('should give a callback that can take arguments', function():void {
 					TestCaseWithMoreAssertions.assertCallbackFired(function(callback:Function):void {
 						callback(1, "", 3, {});
@@ -283,6 +289,22 @@ package com.blchq.unit {
 				it('should fail when callback not called', function():void {
 					assertFails(function():void {
 						TestCaseWithMoreAssertions.assertCallbackFired(function(callback:Function):void { });
+					});
+				});
+
+				it('should fail when callback called with wrong arguments', function():void {
+					assertFails(function():void {
+						TestCaseWithMoreAssertions.assertCallbackFired(function(callback:Function):void {
+							callback('wrongArg1', 2);
+						}, 'arg1', 2);
+					});
+				});
+
+				it('should fail when callback called with too many arguments', function():void {
+					assertFails(function():void {
+						TestCaseWithMoreAssertions.assertCallbackFired(function(callback:Function):void {
+							callback('arg1', 2);
+						}, 'arg1');
 					});
 				});
 			});
