@@ -9,7 +9,7 @@ namespace :test do
       project = Project.new(test_config.test_dir, test_config.test_file_pattern)
 
       @test_suite_name = test_config.test_suite_name
-      @packages = project.packages
+      @packages = project.packages.sort
       @package_test_sets = project.package_test_sets
 
       @task_name = 'test:build:suite'
@@ -53,7 +53,7 @@ class Project
       test_names = files.map { |file| test_name_for(file) }
       
       sets.merge!(package_name_for(directory) => test_names.sort!)
-    end.to_hash
+    end
   end
 
   def packages

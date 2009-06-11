@@ -19,10 +19,10 @@ package {
 		}
 
 		protected function addTests():void {
-<% @package_test_sets.each_pair do |package_name, tests| %>
+<% @packages.each do |package_name| %>
 			// <%= package_name %>
 			
-<% tests.each do |test| %>
+<% @package_test_sets[package_name].each do |test| %>
 			addTestSuite(<%= test %>)
 <% end %>
 
