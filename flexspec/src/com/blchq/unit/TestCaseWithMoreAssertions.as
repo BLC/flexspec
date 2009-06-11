@@ -5,6 +5,7 @@ package com.blchq.unit {
 	import flash.events.Event;
 	import flash.utils.getQualifiedClassName;
 	
+	import flexunit.framework.Assert;
 	import flexunit.framework.AssertionFailedError;
 	import flexunit.framework.TestCase;
 	
@@ -24,6 +25,7 @@ package com.blchq.unit {
 		 *    2 - Actual value
 		 */
 		public static function assertNaN(...args):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			if (args.length == 2) userMessage = args.shift();
 			
@@ -35,6 +37,7 @@ package com.blchq.unit {
 		}
 
 		public static function assertCallbackFired(...args):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			if (args.length == 2 && args[0] is String) userMessage = args.shift();
 
@@ -58,6 +61,7 @@ package com.blchq.unit {
 		}
 
 		public static function assertObjectEquals(...args):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			if (args.length == 3) userMessage = args.shift();
 
@@ -83,6 +87,7 @@ package com.blchq.unit {
 		 *	  3 - Actual value
 		 */
 		public static function assertMatch(...args):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			if (args.length == 3) userMessage = args.shift();
 
@@ -110,6 +115,7 @@ package com.blchq.unit {
 		 *		  [4 - Compare order? (boolean) default: true]
 		 */
 		public static function assertArrayEquals(...args):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			if (args[0] is String) userMessage = args.shift();
 
@@ -155,6 +161,7 @@ package com.blchq.unit {
 		}
 
 		public static function assertInDelta(... args):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			if (args[0] is String) userMessage = args.shift();
 			var expected:Number = args.shift();
@@ -168,6 +175,7 @@ package com.blchq.unit {
 		}
 
 		public static function assertRaise(... args):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			if (args[0] is String) userMessage = args.shift();
 			var errorClass:Class = args.shift();
@@ -179,11 +187,11 @@ package com.blchq.unit {
 				failMessageAddendum = "none was thrown.";
 			} catch (e:Error) {
 				if (!(e is errorClass)) {
-						failMessageAddendum = "was " + getQualifiedClassName(e);
+					failMessageAddendum = "was " + getQualifiedClassName(e);
 				}
 			}
 			if (failMessageAddendum != null) {
-					failWithUserMessage(userMessage, "Expected an exception of " + errorClass + " to be thrown, but " + failMessageAddendum);
+				failWithUserMessage(userMessage, "Expected an exception of " + errorClass + " to be thrown, but " + failMessageAddendum);
 			}
 		}
 
@@ -196,6 +204,7 @@ package com.blchq.unit {
 		}
 
 		private static function assertEvent(shouldBeFired:Boolean, args:Array):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			if (args[0] is String) userMessage = args.shift();
 
@@ -269,6 +278,7 @@ package com.blchq.unit {
 		 *	  3 - Callback that should not fire an event
 		 */
 		public static function assertCairngormEventNotFired(... args):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			if (args[0] is String) userMessage = args.shift();
 
@@ -283,6 +293,7 @@ package com.blchq.unit {
 		}
 
 		public static function assertNotEquals(...args):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			if (args.length == 3) userMessage = args.shift();
 
@@ -309,6 +320,7 @@ package com.blchq.unit {
 		 *
 		 **/
 		public static function assertBindable(... args):void {
+			Assert.oneAssertionHasBeenMade();
 			var userMessage:String = '';
 			var firstArg:Object = args.shift();
 			var eventSource:Object;
@@ -325,12 +337,12 @@ package com.blchq.unit {
 			var eventTriggeringBinding:String = args.shift();
 
 			if (!ChangeWatcher.canWatch(eventSource, bindableAttributeOrGetter))
-					throw new IllegalOperationError("You cannot watch " + eventSource + " for changes to " + bindableAttributeOrGetter);
+				throw new IllegalOperationError("You cannot watch " + eventSource + " for changes to " + bindableAttributeOrGetter);
 
 			var bindingTriggered:Boolean = false;
 
 			ChangeWatcher.watch(eventSource, bindableAttributeOrGetter, function(event:Event):void {
-					bindingTriggered = true;
+				bindingTriggered = true;
 			});
 
 			/**
