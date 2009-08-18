@@ -56,7 +56,7 @@ namespace :flexspec do
   end
 end
 
-class FlexspecConfig < Rake::Config
+class FlexspecConfig < MP::Config
   def flex_spec_cache_location
     File.join(local_cache, 'flexspec')
   end

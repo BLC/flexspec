@@ -82,7 +82,7 @@ class Project
   end
 end
 
-class TestConfig < Rake::Config
+class TestConfig < MP::Config
   def test_suite_name
     "#{app_name}TestSuite"
   end
