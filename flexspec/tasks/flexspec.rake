@@ -1,5 +1,5 @@
 require 'fileutils'
-require File.dirname(__FILE__) + '/config'
+require 'rake_helpers/config'
 
 namespace :flexspec do
   desc "Updates the flexspec code"
