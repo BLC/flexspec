@@ -1,6 +1,6 @@
 require 'erb'
 require 'active_support'
-require File.dirname(__FILE__) + '/config'
+require 'rake_helpers/config'
 
 namespace :test do
   namespace :build do
